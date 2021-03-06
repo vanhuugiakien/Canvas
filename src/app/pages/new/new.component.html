@@ -1,0 +1,225 @@
+<div class="box-container" fxLayout="column">
+  <div class="box-title">Fabric</div>
+
+  <div
+    class="content-container"
+    fxLayout="column"
+    fxLayoutAlign="stretch"
+    fxFlex="auto"
+  >
+    <div class="menu">
+      <div class="button-group">
+        <button
+          class="btn btn-default button-group mode blue lighten-1"
+          (click)="select()"
+          id="Select"
+        >
+          Select
+        </button>
+        <button
+          (click)="freeLine()"
+          class="btn btn-default button-group mode blue lighten-1"
+          id="Freeline"
+        >
+          Free Line
+        </button>
+        <button
+          (click)="this.tool = 'Straightline'"
+          class="btn btn-default button-group mode blue lighten-1"
+          id="Straightline"
+        >
+          Straight Line
+        </button>
+        <button
+          (click)="this.tool = 'Rectangle'"
+          class="btn btn-default button-group mode blue lighten-1"
+          id="Rectangle"
+        >
+          Rectangle
+        </button>
+        <button
+          (click)="this.tool = 'Ellipse'"
+          class="btn btn-default button-group mode blue lighten-1"
+          id="Ellipse"
+        >
+          Ellipse
+        </button>
+        <button
+          (click)="this.tool = 'Circle'"
+          class="btn btn-default button-group mode blue lighten-1"
+          id="Circle"
+        >
+          Circle
+        </button>
+        <button
+          (click)="this.tool = 'Square'"
+          class="btn btn-default button-group mode blue lighten-1"
+          id="Square"
+        >
+          Square
+        </button>
+      </div>
+      <div class="button-group">
+        <div>
+          <button
+            class="btn btn-default button-group cyan darken-4"
+            (click)="toggleType()"
+            id="Fill"
+          >
+            Fill/Stroke
+          </button>
+          <button
+            class="btn btn-default button-group cyan darken-4"
+            (click)="this.componentRef.directiveRef.fabric().clear()"
+            id="Clear"
+          >
+            Clear
+          </button>
+          <button
+            (click)="copyObjects()"
+            class="btn btn-default button-group action cyan darken-4"
+            id="Copy"
+          >
+            Copy
+          </button>
+          <button
+          (click)="cutObjects()"
+            class="btn btn-default button-group action cyan darken-4"
+            id="Cut"
+          >
+            Cut
+          </button>
+          <button
+          (click)="pasteObjects()"
+            class="btn btn-default button-group action cyan darken-4"
+            id="Paste"
+          >
+            Paste
+          </button>
+          <button
+          (click)="deleteObjects()"
+            class="btn btn-default button-group action cyan darken-4"
+            id="Delete"
+          >
+            Delete
+          </button>
+          <button
+          (click)="groupObjects()"
+            class="btn btn-default button-group action cyan darken-4"
+            id="Group"
+          >
+            Group
+          </button>
+          <button
+          (click)="ungroupObjects()"
+            class="btn btn-default button-group action cyan darken-4"
+            id="Ungroup"
+          >
+            Ungroup
+          </button>
+          <button
+          (click)="Undo()"
+            class="btn btn-default button-group action cyan darken-4"
+            id="Undo"
+          >
+            Undo
+          </button>
+          <button
+          (click)="Redo()"
+            class="btn btn-default button-group action cyan darken-4"
+            id="Redo"
+          >
+            Redo
+          </button>
+          <button
+          (click)="saveCanvas()"
+            class="btn btn-default button-group action cyan darken-4"
+            id="Save"
+          >
+            Save
+          </button>
+          <button
+          (click)="loadCanvas()"
+            class="btn btn-default button-group action cyan darken-4"
+            id="Load"
+          >
+            Load
+          </button>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <div class="color-button-group">
+          <button
+            class="btn color"
+            id="Red"
+            (click)="this.color = 'red'"
+            style="background-color: red"
+          ></button>
+          <button
+            class="btn color"
+            id="Orange"
+            (click)="this.color = 'orange'"
+            style="background-color: orange"
+          ></button>
+          <button
+            class="btn color"
+            id="Yellow"
+            (click)="this.color = 'yellow'"
+            style="background-color: yellow"
+          ></button>
+          <button
+            class="btn color"
+            id="Green"
+            (click)="this.color = 'green'"
+            style="background-color: green"
+          ></button>
+          <button
+            class="btn color"
+            id="Blue"
+            (click)="this.color = 'blue'"
+            style="background-color: blue"
+          ></button>
+          <button
+            class="btn color"
+            id="Indigo"
+            (click)="this.color = 'indigo'"
+            style="background-color: indigo"
+          ></button>
+          <button
+            class="btn color"
+            id="Violet"
+            (click)="this.color = 'violet'"
+            style="background-color: violet"
+          ></button>
+          <button
+            class="btn color"
+            id="Black"
+            (click)="this.color = 'black'"
+            style="background-color: black"
+          ></button>
+        </div>
+      </div>
+    </div>
+    <fabric
+      style="background-color: white; width: 1300px; height: 700px"
+      *ngIf="type == 'component' && show"
+      fxFlex="auto"
+      (mouseDown)="mouseDown($event)"
+      (mouseMove)="mouseMove($event)"
+      (mouseUp)="mouseUp($event)"
+      (objectModified)="updateModifications(true)"
+      (objectAdded)="updateModifications(true);"
+      (objectSelected)="true"
+      [data]="data"
+      [config]="config"
+      [disabled]="disabled"
+    >
+    </fabric>
+
+    <div *ngIf="type == 'directive' && show" fxFlex="auto">
+      <canvas class="fabric-canvas" [fabric]="config" [disabled]="disabled">
+      </canvas>
+    </div>
+  </div>
+</div>
